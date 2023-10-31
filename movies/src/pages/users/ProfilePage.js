@@ -1,9 +1,9 @@
-import PageContent from "../components/PageContent";
-import UserProfile from "../components/users/UserProfile";
+import PageContent from "../../components/PageContent";
+import UserProfile from "../../components/users/UserProfile";
 import {useQuery} from "@tanstack/react-query";
-import {getCurrentUser} from "../http_queries/httpQueriesUsers";
-import ErrorBlock from "../components/ErrorBlock";
-import LoadingIndicator from "../components/LoadingIndIcator";
+import {getCurrentUser} from "../../http_queries/httpQueriesUsers";
+import ErrorBlock from "../../components/ErrorBlock";
+import LoadingIndicator from "../../components/LoadingIndIcator";
 
 const ProfilePage = () => {
      const {data, isPending, isError, error} = useQuery({
@@ -20,7 +20,7 @@ const ProfilePage = () => {
   if (isError) {
     content = <>
     <ErrorBlock
-        message={error.info?.message || 'Failed to fetch event data, please try again later'}>
+        message={error.message || 'Failed to fetch user data, please try again later'}>
     </ErrorBlock>
   </>
   }

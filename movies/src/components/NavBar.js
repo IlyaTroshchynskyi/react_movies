@@ -19,7 +19,7 @@ const NavBar = () => {
                                     </NavLink>
                                     {
                                         !isAuthenticated &&
-                                        <NavLink to="/login"
+                                        <NavLink to="login"
                                                  className={({isActive}) => isActive ? `${navLinkClass} underline` : navLinkClass}>
                                             Login
                                         </NavLink>

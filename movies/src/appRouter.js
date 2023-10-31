@@ -2,11 +2,16 @@ import {createBrowserRouter} from 'react-router-dom'
 import ErrorPage from "./pages/ErroPage";
 import HomePage from "./pages/HomePage";
 import RootLayout from "./pages/RootLayout";
-import LoginPage from "./pages/LoginPage";
-import ProfilePage from "./pages/ProfilePage";
-import SignUpPage from "./pages/SignUpPage";
-import LogoutPage from "./pages/LogoutPage";
+import LoginPage from "./pages/users/LoginPage";
+import ProfilePage from "./pages/users/ProfilePage";
+import LogoutPage from "./pages/users/LogoutPage";
 import {getAuthToken} from "./auth/auth";
+import GenrePage from "./pages/genres/GenrePage";
+import CreateGenrePage from "./pages/genres/CreateGenrePage";
+import EditGenrePage from "./pages/genres/EditGenrePage";
+import GenreRoot from "./pages/genres/GenreRoot";
+import React from "react";
+import SignUpPage from "./pages/users/SignUpPage";
 
 
 
@@ -22,7 +27,22 @@ const router = createBrowserRouter([
             {path: 'logout',  element: <LogoutPage/>},
             {path: 'login', element: <LoginPage/>},
             {path: 'profile', element: <ProfilePage/>},
-            {path: 'signup', element: <SignUpPage/>}
+            {path: 'signup', element: <SignUpPage/>},
+            {
+                path: 'genres', element: <GenreRoot/>,
+                children: [
+                    {index: true, element: <GenrePage/>
+
+                    },
+                    {path: ':genreId',
+                        children: [
+                            {path: 'edit', element: <EditGenrePage/>}
+                        ]
+                    },
+                    {path: 'new', element: <CreateGenrePage/>},
+                ]
+
+            }
         ]
     }
 

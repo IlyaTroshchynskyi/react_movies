@@ -1,6 +1,6 @@
-import {tokenTypes} from "../auth/tokenTypes";
+import {tokenTypes} from "../../auth/tokenTypes";
 import {useDispatch} from "react-redux";
-import {authActions} from "../store/auth-slice";
+import {authActions} from "../../store/auth-slice";
 
 import {useNavigate} from "react-router";
 import {useEffect} from "react";
