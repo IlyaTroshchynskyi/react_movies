@@ -1,5 +1,5 @@
 import React from 'react';
-import {usePagination, DOTS} from './hooks/usePagination';
+import {usePagination, DOTS} from '../hooks/usePagination';
 import {Link} from "react-router-dom";
 
 const Pagination = props => {

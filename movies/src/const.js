@@ -1,0 +1,4 @@
+export const MIN_LENGTH_GENRE_NAME = 3
+export const MAX_LENGTH_GENRE_NAME = 100
+export const MIN_LENGTH_GENRE_DESCRIPTION = 5
+export const MIN_LENGTH_GENRE_URL = 3
