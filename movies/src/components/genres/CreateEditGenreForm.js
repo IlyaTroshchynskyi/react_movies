@@ -1,20 +1,50 @@
 import {useNavigate} from "react-router";
+import useValidation from "../../hooks/useValidation";
+import {validateDescription, validateName, validateUrl} from "../../validators/genres";
 
 function CreateEditGenreForm(props) {
   const navigate = useNavigate()
+
+  const {
+    isValid: enteredNameIsValid,
+    hasError: enteredNameHasError,
+    valueChangeHandler: nameChangeHandler,
+    inputBlurHandler: nameBlurHandler,
+  } = useValidation(validateName)
+
+  const {
+    isValid: enteredDescriptionIsValid,
+    hasError: enteredDescriptionHasError,
+    valueChangeHandler: descriptionChangeHandler,
+    inputBlurHandler: descriptionBlurHandler,
+  } = useValidation(validateDescription)
+
+  const {
+    isValid: enteredUrlIsValid,
+    hasError: enteredUrlHasError,
+    valueChangeHandler: urlChangeHandler,
+    inputBlurHandler: urlBlurHandler,
+  } = useValidation(validateUrl)
+
+
   function onSubmitHandler(event) {
     event.preventDefault();
+
+    if (!enteredNameIsValid || !enteredUrlIsValid || !enteredUrlIsValid) {
+      return
+    }
 
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData);
 
     props.onSubmit({data})
   }
+
   function onCancelHandler() {
     navigate(props.backPath)
   }
 
-
+  const paragraphErrorClass = 'block w-6/12 bg-red-100 border border-red-400 text-red-700 px-6 py-2 rounded relative'
   return (
       <>
         <form onSubmit={onSubmitHandler}>
@@ -34,9 +64,17 @@ function CreateEditGenreForm(props) {
                         type="text"
                         name="name"
                         id="name"
+                        onBlur={nameBlurHandler}
+                        onChange={nameChangeHandler}
                         defaultValue={props.genreData?.name ?? ''}
                         className="block w-6/12 p-2.5 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     />
+                    {
+                        enteredNameHasError &&
+                        <p className={paragraphErrorClass}>
+                          Name must has length more than 3 characters.
+                        </p>
+                    }
                   </div>
                 </div>
 
@@ -47,11 +85,19 @@ function CreateEditGenreForm(props) {
                   <textarea
                       id="description"
                       rows="4"
+                      onBlur={descriptionBlurHandler}
+                      onChange={descriptionChangeHandler}
                       name='description'
                       defaultValue={props.genreData?.description ?? ''}
                       className='block  p-2.5 w-6/12 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6'
                       placeholder="Write your thoughts here...">
                   </textarea>
+                  {
+                      enteredDescriptionHasError &&
+                      <p className={paragraphErrorClass}>
+                        Description must has length more than 5 characters.
+                      </p>
+                  }
                 </div>
 
                 <div className="sm:col-span-3">
@@ -62,10 +108,16 @@ function CreateEditGenreForm(props) {
                     <input
                         id="url"
                         name="url"
+                        onBlur={urlBlurHandler}
+                        onChange={urlChangeHandler}
                         type="text"
                         defaultValue={props.genreData?.url ?? ''}
                         className="block w-6/12  p-2.5 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     />
+                    {enteredUrlHasError &&
+                        <p className={paragraphErrorClass}>
+                          Url must has length more than 3 characters and doesn't contain whitespaces.
+                        </p>}
                   </div>
                 </div>
 
