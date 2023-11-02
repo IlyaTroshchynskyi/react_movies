@@ -3,6 +3,7 @@ import {useLoaderData} from "react-router-dom";
 import {useEffect} from "react";
 import {decodeToken, getCurrentDatetimeSec} from "../auth/auth";
 import {useNavigate} from "react-router";
+import SideBar from "../components/SideBar";
 import {useDispatch} from "react-redux";
 import {authActions} from "../store/auth-slice";
 
@@ -32,6 +33,7 @@ const RootLayout = () => {
     return (
         <>
             <NavBar/>
+            <SideBar/>
         </>
     )
 }

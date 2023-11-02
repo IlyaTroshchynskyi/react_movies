@@ -1,5 +1,5 @@
-import PageContent from "../components/PageContent";
-import SignInForm from "../components/users/SignInForm";
+import PageContent from "../../components/PageContent";
+import SignInForm from "../../components/users/SignInForm";
 
 
 const SignUpPage = () => {

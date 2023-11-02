@@ -1,11 +1,11 @@
-import PageContent from "../components/PageContent";
-import LoginForm from "../components/users/LoginForm";
+import PageContent from "../../components/PageContent";
+import LoginForm from "../../components/users/LoginForm";
 import {useMutation} from "@tanstack/react-query";
-import {loginUser} from "../http_queries/httpQueriesUsers";
+import {loginUser} from "../../http_queries/httpQueriesUsers";
 import {useNavigate} from "react-router";
 import {useDispatch} from "react-redux";
-import {authActions} from "../store/auth-slice";
-import ErrorBlock from "../components/ErrorBlock";
+import {authActions} from "../../store/auth-slice";
+import ErrorBlock from "../../components/ErrorBlock";
 
 const LoginPage = () => {
     const navigate = useNavigate()
@@ -31,8 +31,7 @@ const LoginPage = () => {
         <PageContent>
            <LoginForm onSubmit={handleSubmit}/>
             {isPending && 'Submitting ...'}
-            {isError && <ErrorBlock
-            message={error.info?.message || 'Failed to log in'}/>}
+            {isError && <ErrorBlock message={error.message || 'Failed to log in'}/>}
          </PageContent>
     )
 }
