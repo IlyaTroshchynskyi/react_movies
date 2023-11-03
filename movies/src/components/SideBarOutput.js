@@ -19,7 +19,7 @@ function SideBarOutput(props) {
                     <div className='order-last'>
                         <Link to='new'
                               className="bg-gray-300 hover:bg-blue-100 text-blue-500 font-bold py-2 px-4 rounded-full">
-                            Add Genre
+                            {props.buttonAddSignature}
                         </Link>
                     </div>
                 </div>

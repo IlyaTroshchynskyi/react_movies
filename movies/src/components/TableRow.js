@@ -43,7 +43,7 @@ function TableRow(props) {
                                               onDelete={deleteConfirmHandler.bind(null, props.dataRow.id)}/>}
             <tr key={props.dataRow.id} className="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
                 {
-                    genreKeys.map((key) => <td key={key} className="px-6 py-4"> {props.dataRow[key]}</td>)
+                    genreKeys.map((key) => <td key={key} className="px-6 py-4"> {props.dataRow[key] || '-'}</td>)
                 }
 
                 <td className="px-6 py-4">

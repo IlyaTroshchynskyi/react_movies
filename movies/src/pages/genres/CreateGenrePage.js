@@ -15,9 +15,8 @@ const CreateGenrePage = () => {
             queryClient.invalidateQueries({queryKey: ['genres']})
             navigate('/genres')
         }
-
-
     })
+
     function onCreateGenre(genreData) {
         mutate({genreData})
     }
@@ -27,8 +26,7 @@ const CreateGenrePage = () => {
         content = <div className='flex items-center'>
             <LoadingIndicator/>
         </div>
-    }
-    if (isError) {
+    } else if (isError) {
         content = <>
             <ErrorBlock
                 message={error.message || 'Failed to create genre data, please try again later'}>

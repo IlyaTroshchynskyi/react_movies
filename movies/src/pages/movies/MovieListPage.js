@@ -2,28 +2,28 @@ import PageContent from "../../components/PageContent";
 import {useQuery} from "@tanstack/react-query";
 import ErrorBlock from "../../components/ErrorBlock";
 import LoadingIndicator from "../../components/LoadingIndIcator";
-import {getGenres} from "../../http_queries/httpsQueriesGenres";
 import SideBarOutput from "../../components/SideBarOutput";
-import {genreColumns} from "../../components/TableColumnNames";
+import {moviesColumns} from "../../components/TableColumnNames";
 import {useState} from "react";
 import {useLocation} from "react-router";
+import {getMovies} from "../../http_queries/httpQueriesMovies";
+import {PAGE_SIZE} from "../../const";
+import MovieFilters from "../../components/movies/MovieFilters";
 
-const GenrePage = () => {
+const MovieListPage = () => {
+
     const location = useLocation();
+    const [filterQueryParams, setFilterQueryParams] = useState('')
     const searchParams = new URLSearchParams(location.search);
 
-    let pageNumber = searchParams.get('page');
-    if (!pageNumber){
-        pageNumber = 1
-    }
+    const pageNumber = searchParams.get('page') || 1;
 
-    const pageSize= 5;
     const [currentPage, setCurrentPage] = useState(+pageNumber);
     const startOffset = currentPage - 1
 
     const {data, isPending, isError, error} = useQuery({
-        queryKey: ['genres', {limit: pageSize, offset: startOffset}],
-        queryFn: () => getGenres(pageSize,pageSize * startOffset)
+        queryKey: ['movies', {limit: PAGE_SIZE, offset: startOffset, filterQueryParams: filterQueryParams}],
+        queryFn: () => getMovies(PAGE_SIZE,PAGE_SIZE * startOffset, filterQueryParams)
     })
 
 
@@ -35,25 +35,26 @@ const GenrePage = () => {
     } else if (isError) {
         content = <>
             <ErrorBlock
-                message={error.message || 'Failed to fetch genre data, please try again later'}>
+                message={error.message || 'Failed to fetch movies data, please try again later'}>
             </ErrorBlock>
         </>
     } else if (data) {
         content = <SideBarOutput
             totalCount={data.count}
-            pageSize={pageSize}
+            pageSize={PAGE_SIZE}
             onPageChange={page => setCurrentPage(page)}
             setCurrentPage={setCurrentPage}
             currentPage={currentPage}
-            columns={genreColumns}
+            columns={moviesColumns}
             data={data.results}
-            buttonAddSignature={'Add genre'}
+            buttonAddSignature={'Add movie'}
             resourcePath='edit'
         />
     }
     return (
         <>
             <PageContent>
+                <MovieFilters onSetFilterQueryParams={setFilterQueryParams}/>
                 {content}
             </PageContent>
         </>
@@ -61,4 +62,4 @@ const GenrePage = () => {
 }
 
 
-export default GenrePage
+export default MovieListPage

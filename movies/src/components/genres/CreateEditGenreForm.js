@@ -30,7 +30,7 @@ function CreateEditGenreForm(props) {
   function onSubmitHandler(event) {
     event.preventDefault();
 
-    if (!enteredNameIsValid || !enteredUrlIsValid || !enteredUrlIsValid) {
+    if (!enteredNameIsValid || !enteredDescriptionIsValid || !enteredUrlIsValid) {
       return
     }
 
