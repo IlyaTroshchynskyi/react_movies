@@ -43,16 +43,13 @@ const EditGenrePage = () => {
         content = <div className='flex items-center'>
             <LoadingIndicator/>
         </div>
-    }
-    if (isError) {
+    } else if (isError) {
         content = <>
             <ErrorBlock
                 message={error.message || 'Failed to fetch genre data, please try again later'}>
             </ErrorBlock>
         </>
-    }
-
-    if (data) {
+    } else if (data) {
         content = <CreateEditGenreForm genreData={data} onSubmit={handleSubmit} backPath='../../'/>
     }
     return (

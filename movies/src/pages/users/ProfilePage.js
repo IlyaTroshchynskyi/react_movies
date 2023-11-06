@@ -6,33 +6,30 @@ import ErrorBlock from "../../components/ErrorBlock";
 import LoadingIndicator from "../../components/LoadingIndIcator";
 
 const ProfilePage = () => {
-     const {data, isPending, isError, error} = useQuery({
+    const {data, isPending, isError, error} = useQuery({
         queryFn: getCurrentUser
     })
 
 
-  let content;
-  if (isPending) {
-    content = <div className='flex items-center'>
-      <LoadingIndicator/>
-    </div>
-  }
-  if (isError) {
-    content = <>
-    <ErrorBlock
-        message={error.message || 'Failed to fetch user data, please try again later'}>
-    </ErrorBlock>
-  </>
-  }
-
-  if (data) {
-    content = <UserProfile title='Profile page' userData={data}/>
-  }
+    let content;
+    if (isPending) {
+        content = <div className='flex items-center'>
+            <LoadingIndicator/>
+        </div>
+    } else if (isError) {
+        content = <>
+            <ErrorBlock
+                message={error.message || 'Failed to fetch user data, please try again later'}>
+            </ErrorBlock>
+        </>
+    } else if (data) {
+        content = <UserProfile title='Profile page' userData={data}/>
+    }
     return (
         <>
-        <PageContent>
-            {content}
-        </PageContent>
+            <PageContent>
+                {content}
+            </PageContent>
         </>
     )
 }

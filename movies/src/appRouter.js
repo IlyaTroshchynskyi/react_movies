@@ -12,6 +12,8 @@ import EditGenrePage from "./pages/genres/EditGenrePage";
 import GenreRoot from "./pages/genres/GenreRoot";
 import React from "react";
 import SignUpPage from "./pages/users/SignUpPage";
+import MovieRoot from "./pages/movies/MovieRoot";
+import MovieListPage from "./pages/movies/MovieListPage";
 
 
 
@@ -28,6 +30,7 @@ const router = createBrowserRouter([
             {path: 'login', element: <LoginPage/>},
             {path: 'profile', element: <ProfilePage/>},
             {path: 'signup', element: <SignUpPage/>},
+            // GENRES ----------------------------
             {
                 path: 'genres', element: <GenreRoot/>,
                 children: [
@@ -40,6 +43,14 @@ const router = createBrowserRouter([
                         ]
                     },
                     {path: 'new', element: <CreateGenrePage/>},
+                ]
+
+            },
+            // MOVIES ---------------------------------------
+            {
+                path: 'movies', element: <MovieRoot/>,
+                children: [
+                    {index: true, element: <MovieListPage/>},
                 ]
 
             }
