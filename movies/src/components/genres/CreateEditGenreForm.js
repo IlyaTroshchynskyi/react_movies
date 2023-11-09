@@ -1,6 +1,8 @@
 import {useNavigate} from "react-router";
 import useValidation from "../../hooks/useValidation";
 import {validateDescription, validateName, validateUrl} from "../../validators/genres";
+import Input from "../Input";
+import TextArea from "../TextArea";
 
 function CreateEditGenreForm(props) {
   const navigate = useNavigate()
@@ -10,21 +12,21 @@ function CreateEditGenreForm(props) {
     hasError: enteredNameHasError,
     valueChangeHandler: nameChangeHandler,
     inputBlurHandler: nameBlurHandler,
-  } = useValidation(validateName)
+  } = useValidation(validateName, props.genreData?.name ?? '')
 
   const {
     isValid: enteredDescriptionIsValid,
     hasError: enteredDescriptionHasError,
     valueChangeHandler: descriptionChangeHandler,
     inputBlurHandler: descriptionBlurHandler,
-  } = useValidation(validateDescription)
+  } = useValidation(validateDescription, props.genreData?.description ?? '')
 
   const {
     isValid: enteredUrlIsValid,
     hasError: enteredUrlHasError,
     valueChangeHandler: urlChangeHandler,
     inputBlurHandler: urlBlurHandler,
-  } = useValidation(validateUrl)
+  } = useValidation(validateUrl, props.genreData?.url ?? '')
 
 
   function onSubmitHandler(event) {
@@ -44,7 +46,6 @@ function CreateEditGenreForm(props) {
     navigate(props.backPath)
   }
 
-  const paragraphErrorClass = 'block w-6/12 bg-red-100 border border-red-400 text-red-700 px-6 py-2 rounded relative'
   return (
       <>
         <form onSubmit={onSubmitHandler}>
@@ -55,75 +56,39 @@ function CreateEditGenreForm(props) {
 
               <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-3">
 
-                <div className="sm:col-span-3">
-                  <label htmlFor="first-name" className="block text-sm font-medium leading-6 text-gray-900">
-                    Genre Name
-                  </label>
-                  <div className="mt-2">
-                    <input
-                        type="text"
-                        name="name"
-                        id="name"
-                        onBlur={nameBlurHandler}
-                        onChange={nameChangeHandler}
-                        defaultValue={props.genreData?.name ?? ''}
-                        className="block w-6/12 p-2.5 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                    />
-                    {
-                        enteredNameHasError &&
-                        <p className={paragraphErrorClass}>
-                          Name must has length more than 3 characters.
-                        </p>
-                    }
-                  </div>
-                </div>
+                <Input
+                    id='name'
+                    type='text'
+                    label='Genre Name'
+                    onBlurHandler={nameBlurHandler}
+                    onChangeHandler={nameChangeHandler}
+                    data={props.genreData?.name ?? ''}
+                    enteredValueHasError={enteredNameHasError}
+                    validationMsg='Genre Name must has length more than 3 characters.'
+                />
 
-                <div className="sm:col-span-3">
-                  <label htmlFor="message" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                    Description
-                  </label>
-                  <textarea
-                      id="description"
-                      rows="4"
-                      onBlur={descriptionBlurHandler}
-                      onChange={descriptionChangeHandler}
-                      name='description'
-                      defaultValue={props.genreData?.description ?? ''}
-                      className='block  p-2.5 w-6/12 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6'
-                      placeholder="Write your thoughts here...">
-                  </textarea>
-                  {
-                      enteredDescriptionHasError &&
-                      <p className={paragraphErrorClass}>
-                        Description must has length more than 5 characters.
-                      </p>
-                  }
-                </div>
+                <TextArea
+                    id='description'
+                    label='Description'
+                    onBlurHandler={descriptionBlurHandler}
+                    onChangeHandler={descriptionChangeHandler}
+                    data={props.genreData?.description ?? ''}
+                    enteredValueHasError={enteredDescriptionHasError}
+                    validationMsg='Description must has length more than 5 characters.'
+                />
 
-                <div className="sm:col-span-3">
-                  <label htmlFor="url" className="block text-sm font-medium leading-6 text-gray-900">
-                    Url
-                  </label>
-                  <div className="mt-2">
-                    <input
-                        id="url"
-                        name="url"
-                        onBlur={urlBlurHandler}
-                        onChange={urlChangeHandler}
-                        type="text"
-                        defaultValue={props.genreData?.url ?? ''}
-                        className="block w-6/12  p-2.5 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                    />
-                    {enteredUrlHasError &&
-                        <p className={paragraphErrorClass}>
-                          Url must has length more than 3 characters and doesn't contain whitespaces.
-                        </p>}
-                  </div>
-                </div>
-
+                <Input
+                    id='url'
+                    type='text'
+                    label='Url'
+                    onBlurHandler={urlBlurHandler}
+                    onChangeHandler={urlChangeHandler}
+                    data={props.genreData?.url ?? ''}
+                    enteredValueHasError={enteredUrlHasError}
+                    validationMsg="Url must has length more than 3 characters and doesn't contain whitespaces.."
+                />
               </div>
             </div>
-
           </div>
 
           <div className="mt-6 flex items-center justify-start gap-x-6">

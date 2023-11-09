@@ -6,9 +6,10 @@ import SideBarOutput from "../../components/SideBarOutput";
 import {moviesColumns} from "../../components/TableColumnNames";
 import {useState} from "react";
 import {useLocation} from "react-router";
-import {getMovies} from "../../http_queries/httpQueriesMovies";
+import {deleteMovie, getMovies} from "../../http_queries/httpQueriesMovies";
 import {PAGE_SIZE} from "../../const";
 import MovieFilters from "../../components/movies/MovieFilters";
+import {deleteGenre} from "../../http_queries/httpsQueriesGenres";
 
 const MovieListPage = () => {
 
@@ -49,6 +50,8 @@ const MovieListPage = () => {
             data={data.results}
             buttonAddSignature={'Add movie'}
             resourcePath='edit'
+            deleteRecordFunc={deleteMovie}
+            queryKey='movies'
         />
     }
     return (

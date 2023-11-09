@@ -1,12 +1,13 @@
 import PageContent from "../../components/PageContent";
-import {useQuery} from "@tanstack/react-query";
 import ErrorBlock from "../../components/ErrorBlock";
 import LoadingIndicator from "../../components/LoadingIndIcator";
-import {getGenres} from "../../http_queries/httpsQueriesGenres";
+import {deleteGenre, getGenres} from "../../http_queries/httpsQueriesGenres";
 import SideBarOutput from "../../components/SideBarOutput";
 import {genreColumns} from "../../components/TableColumnNames";
 import {useState} from "react";
 import {useLocation} from "react-router";
+import {useQuery} from "@tanstack/react-query";
+
 
 const GenrePage = () => {
     const location = useLocation();
@@ -25,7 +26,6 @@ const GenrePage = () => {
         queryKey: ['genres', {limit: pageSize, offset: startOffset}],
         queryFn: () => getGenres(pageSize,pageSize * startOffset)
     })
-
 
     let content;
     if (isPending) {
@@ -49,6 +49,8 @@ const GenrePage = () => {
             data={data.results}
             buttonAddSignature={'Add genre'}
             resourcePath='edit'
+            deleteRecordFunc={deleteGenre}
+            queryKey='genres'
         />
     }
     return (
