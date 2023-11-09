@@ -4,6 +4,6 @@ export const genreColumns = ['id', 'name', 'description', 'url'].concat(actionCo
 
 export const moviesColumns = [
     'id', 'title', 'description', 'year', 'country', 'directors', 'actors', 'genres', 'world_premier', 'budget',
-    'fees_is_usa', 'fees_in_world', 'category', 'rating_user', 'middle_star', 'url'
+    'fees_is_usa', 'fees_in_world', 'rating_user', 'middle_star', 'url'
 ].concat(actionColumns)
 

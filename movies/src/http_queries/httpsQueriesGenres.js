@@ -27,9 +27,9 @@ export async function updateGenre({genreId, genreData}) {
 }
 
 
-export async function deleteGenre({genreId}) {
+export async function deleteGenre({objId}) {
     const token = await getAuthToken()
-    const {data} = await axiosClient.delete('v1/genre/' + genreId + '/',
+    const {data} = await axiosClient.delete('v1/genre/' + objId + '/',
         {headers: {'Authorization': 'Bearer ' + token}}
     )
 

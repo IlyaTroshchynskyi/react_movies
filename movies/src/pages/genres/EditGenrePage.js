@@ -18,10 +18,10 @@ const EditGenrePage = () => {
     const {mutate, isPendingUpdate, isErrorUpdate, errorUpdate} = useMutation({
 
         mutationFn: updateGenre,
-        onMutate: async (data) => {
+        onMutate: async (dataOnMute) => {
             queryClient.cancelQueries({queryKey: ['genres', genreId]})
             const previousEvent = queryClient.getQueryData(['genres', genreId])
-            queryClient.setQueryData(['genres', genreId], data.genreData)
+            queryClient.setQueryData(['genres', genreId], dataOnMute.data)
             return {previousEvent}
         },
         onError: (error, data, context) => {
@@ -49,7 +49,9 @@ const EditGenrePage = () => {
                 message={error.message || 'Failed to fetch genre data, please try again later'}>
             </ErrorBlock>
         </>
-    } else if (data) {
+    }
+
+    if (data) {
         content = <CreateEditGenreForm genreData={data} onSubmit={handleSubmit} backPath='../../'/>
     }
     return (

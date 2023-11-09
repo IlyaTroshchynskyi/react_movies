@@ -14,6 +14,8 @@ import React from "react";
 import SignUpPage from "./pages/users/SignUpPage";
 import MovieRoot from "./pages/movies/MovieRoot";
 import MovieListPage from "./pages/movies/MovieListPage";
+import EditMoviePage from "./pages/movies/EditMoviePage";
+import CreateMoviePage from "./pages/movies/CreateMoviePage";
 
 
 
@@ -34,9 +36,7 @@ const router = createBrowserRouter([
             {
                 path: 'genres', element: <GenreRoot/>,
                 children: [
-                    {index: true, element: <GenrePage/>
-
-                    },
+                    {index: true, element: <GenrePage/>},
                     {path: ':genreId',
                         children: [
                             {path: 'edit', element: <EditGenrePage/>}
@@ -51,6 +51,12 @@ const router = createBrowserRouter([
                 path: 'movies', element: <MovieRoot/>,
                 children: [
                     {index: true, element: <MovieListPage/>},
+                    {path: ':movieId',
+                        children: [
+                            {path: 'edit', element: <EditMoviePage/>}
+                        ]
+                    },
+                    {path: 'new', element: <CreateMoviePage/>},
                 ]
 
             }

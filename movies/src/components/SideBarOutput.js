@@ -7,10 +7,9 @@ import ErrorBlock from "./ErrorBlock";
 
 function SideBarOutput(props) {
     const [deletingError, setDeletingError] = useState('')
-    useEffect(()=> {
+    useEffect(() => {
 
     }, [deletingError])
-
 
     return (
         <>
@@ -30,11 +29,12 @@ function SideBarOutput(props) {
                         <tbody>
                         {
                             props.data.map((item) => <TableRow
+                                deleteRecordFunc={props.deleteRecordFunc}
+                                queryKey={props.queryKey}
                                 key={item.id} dataRow={item}
                                 resourcePath={props.resourcePath}
-                                setDeletingError={()=> setDeletingError()}
+                                setDeletingError={setDeletingError}
                             />)
-
                         }
                         </tbody>
                     </table>
@@ -42,7 +42,7 @@ function SideBarOutput(props) {
                         currentPage={props.currentPage}
                         totalCount={props.totalCount}
                         pageSize={props.pageSize}
-                        onPageChange={page =>  props.setCurrentPage(page)}
+                        onPageChange={page => props.setCurrentPage(page)}
                     />
                 </div>
 
