@@ -5,7 +5,7 @@ import {
     MIN_LENGTH_MOVIE_DESCRIPTION,
     MIN_LENGTH_MOVIE_TITLE,
     MIN_LENGTH_MOVIE_URL, START_YEAR_FILTER
-} from "../const";
+} from "../const/config";
 
 export const validateTitle = (title) => {
     console.log(title, 'title', (title.length > MIN_LENGTH_MOVIE_TITLE && title.length < MAX_LENGTH_MOVIE_TITLE))

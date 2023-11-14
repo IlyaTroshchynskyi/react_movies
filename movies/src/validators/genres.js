@@ -3,7 +3,7 @@ import {
     MIN_LENGTH_GENRE_DESCRIPTION,
     MIN_LENGTH_GENRE_NAME,
     MIN_LENGTH_GENRE_URL
-} from "../const";
+} from "../const/config";
 
 export const validateName = (name) => {
     return name.length > MIN_LENGTH_GENRE_NAME && name.length < MAX_LENGTH_GENRE_NAME;
