@@ -5,13 +5,13 @@ const authSlice = createSlice({
     name: 'auth',
     initialState: {isAuthenticated: false},
     reducers: {
-         authUser(state) {
+        authUser(state) {
             state.isAuthenticated = true
         },
         logoutUser(state) {
             state.isAuthenticated = false
         },
-    }
+    },
 })
 
 export const authActions = authSlice.actions

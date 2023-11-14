@@ -1,5 +1,5 @@
 import {tokenTypes} from "./tokenTypes";
-import axios from "axios";
+import axiosClient from "../http_queries/axios_client";
 
 
 export function getCurrentDatetimeSec() {
@@ -25,8 +25,8 @@ export async function getAuthToken() {
 
     const refreshToken = localStorage.getItem(tokenTypes.movieRefreshToken)
     if (refreshToken) {
-        const {data, status} = await axios.post(
-            'http://0.0.0.0:8000/api/token/refresh/',
+        const {data, status} = await axiosClient.post(
+            'api/token/refresh/',
             {refresh: refreshToken},
             {
                 headers: {'Content-Type': 'application/json'}

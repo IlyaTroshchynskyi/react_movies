@@ -14,12 +14,10 @@ export async function getMovie({movieId}) {
 
 
 export async function getAllCountries() {
-    const countries = new Set();
     const {data} = await axiosClient.get(`v1/movie/`)
-    for (const movie of data.results) {
-        countries.add(movie.country)
-    }
-    return Array.from(countries)
+    const countries = data.results.map(movie => movie.country)
+    return Array.from(new Set(countries))
+
 }
 
 export async function updateMovie({movieId, movieData}) {
