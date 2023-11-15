@@ -7,3 +7,4 @@ export const moviesColumns = [
     'fees_is_usa', 'fees_in_world', 'rating_user', 'middle_star', 'url'
 ].concat(actionColumns)
 
+export const actorColumns = ['id', 'name', 'age', 'description'].concat(actionColumns)

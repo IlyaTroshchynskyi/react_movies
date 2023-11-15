@@ -14,6 +14,7 @@ import {
 import TextArea from "../TextArea";
 import {END_YEAR_FILTER, MAX_INT_VALUE, MIN_INT_VALUE, START_YEAR_FILTER} from "../../const/config";
 import MovieRelatedObj from "../MovieRelatedObj";
+import SubmitCancelButtons from "../SubmitCancelButtons";
 
 
 function convertIdToInt(formData, fieldName) {
@@ -222,21 +223,7 @@ const CreateEditMovieForm = (props) => {
                         </div>
                     </div>
                 </div>
-
-                <div className="mt-6 flex items-center justify-start gap-x-6">
-                    <button
-                        type="button"
-                        onClick={onCancelHandler}
-                        className="rounded-md bg-gray-300 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-cyan-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-                        Cancel
-                    </button>
-                    <button
-                        type="submit"
-                        className="rounded-md bg-indigo-300 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-cyan-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                    >
-                        Save
-                    </button>
-                </div>
+                <SubmitCancelButtons onCancelHandler={onCancelHandler}/>
             </form>
         </>
     )

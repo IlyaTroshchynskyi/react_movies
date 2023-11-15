@@ -16,6 +16,9 @@ import MovieRoot from "./pages/movies/MovieRoot";
 import MovieListPage from "./pages/movies/MovieListPage";
 import EditMoviePage from "./pages/movies/EditMoviePage";
 import CreateMoviePage from "./pages/movies/CreateMoviePage";
+import ActorRoot from "./pages/actors/ActorRoot";
+import CreateActorPage from "./pages/actors/CreateActorPage";
+import ActorListPage from "./pages/actors/ActorsListPage";
 
 
 const router = createBrowserRouter([
@@ -58,6 +61,15 @@ const router = createBrowserRouter([
                         ]
                     },
                     {path: 'new', element: <CreateMoviePage/>},
+                ]
+
+            },
+            // Actors ---------------------------------------
+            {
+                path: 'actors', element: <ActorRoot/>,
+                children: [
+                    {index: true, element: <ActorListPage/>},
+                    {path: 'new', element: <CreateActorPage/>},
                 ]
 
             }

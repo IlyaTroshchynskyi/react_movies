@@ -1,15 +1,15 @@
 import React from 'react';
 import ErrorBlock from "../../components/ErrorBlock";
 import LoadingIndicator from "../../components/LoadingIndIcator";
-import {deleteGenre, getGenres} from "../../http_queries/httpsQueriesGenres";
 import SideBarOutput from "../../components/SideBarOutput";
-import {genreColumns} from "../../const/TableColumnNames";
+import {actorColumns} from "../../const/TableColumnNames";
 import {useState} from "react";
 import {useLocation} from "react-router";
 import {useQuery} from "@tanstack/react-query";
+import {deleteActor, getActors} from "../../http_queries/httpQueriesActors";
 
 
-const GenrePage = () => {
+const ActorListPage = () => {
     const location = useLocation();
     const searchParams = new URLSearchParams(location.search);
 
@@ -19,13 +19,13 @@ const GenrePage = () => {
     const startOffset = currentPage - 1
 
     const {data, isPending, isError, error} = useQuery({
-        queryKey: ['genres', {limit: pageSize, offset: startOffset}],
-        queryFn: () => getGenres(pageSize, pageSize * startOffset)
+        queryKey: ['actors', {limit: pageSize, offset: startOffset}],
+        queryFn: () => getActors(pageSize, pageSize * startOffset)
     })
-
-    const content = isPending ? <div className='flex items-center'><LoadingIndicator/></div>
+    const content = isPending
+        ? <div className='flex items-center'><LoadingIndicator/></div>
         : isError
-            ? <ErrorBlock message={error.message || 'Failed to fetch genre data'}/>
+            ? <ErrorBlock message={error.message || 'Failed to fetch actor data'}/>
             : data
                 ? <SideBarOutput
                     totalCount={data.count}
@@ -33,13 +33,14 @@ const GenrePage = () => {
                     onPageChange={page => setCurrentPage(page)}
                     setCurrentPage={setCurrentPage}
                     currentPage={currentPage}
-                    columns={genreColumns}
+                    columns={actorColumns}
                     data={data.results}
-                    buttonAddSignature={'Add genre'}
+                    buttonAddSignature={'Add Actor'}
                     resourcePath='edit'
-                    deleteRecordFunc={deleteGenre}
-                    queryKey='genres'
-                /> : null
+                    deleteRecordFunc={deleteActor}
+                    queryKey='actors'
+                />
+                : null;
 
     return (
         <>
@@ -49,4 +50,4 @@ const GenrePage = () => {
 }
 
 
-export default GenrePage
+export default ActorListPage
