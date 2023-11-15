@@ -22,7 +22,7 @@ const Input = (props) => {
                     />
                     {
                         props.enteredValueHasError &&
-                        <p className={paragraphErrorClass}>
+                        <p data-testid={props.id} className={paragraphErrorClass}>
                             {props.validationMsg}
                         </p>
                     }

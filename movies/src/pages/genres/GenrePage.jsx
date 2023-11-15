@@ -5,7 +5,7 @@ import {deleteGenre, getGenres} from "../../http_queries/httpsQueriesGenres";
 import SideBarOutput from "../../components/SideBarOutput";
 import {genreColumns} from "../../const/TableColumnNames";
 import {useState} from "react";
-import {useLocation} from "react-router";
+import {useLocation} from "react-router-dom";
 import {useQuery} from "@tanstack/react-query";
 
 

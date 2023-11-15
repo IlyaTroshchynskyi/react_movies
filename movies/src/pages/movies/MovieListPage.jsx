@@ -15,11 +15,11 @@ const MovieListPage = () => {
 
     const location = useLocation();
     const [filterQueryParams, setFilterQueryParams] = useState('')
-    const searchParams = new URLSearchParams(location.search);
+    const searchParams = new URLSearchParams(location.search)
 
-    const pageNumber = searchParams.get('page') || 1;
+    const pageNumber = searchParams.get('page') || 1
 
-    const [currentPage, setCurrentPage] = useState(+pageNumber);
+    const [currentPage, setCurrentPage] = useState(+pageNumber)
     const startOffset = currentPage - 1
 
     const {data, isPending, isError, error} = useQuery({

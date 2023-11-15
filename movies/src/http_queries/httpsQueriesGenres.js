@@ -2,7 +2,6 @@ import {getAuthToken} from "../auth/auth";
 import {axiosClient} from "./axios_client";
 
 
-
 export async function getGenres(limit, offset) {
     const {data} = await axiosClient.get(`v1/genre/?limit=${limit}&offset=${offset}`)
     return data
@@ -46,3 +45,6 @@ export async function createGenre({genreData}) {
 
     return data
 }
+
+
+export default {getGenres, createGenre, deleteGenre, updateGenre, getGenre}

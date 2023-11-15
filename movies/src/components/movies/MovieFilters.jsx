@@ -7,15 +7,15 @@ import SortingFilter from "./SortingFilter";
 
 
 const MovieFilters = (props) => {
-    const [startYear, setStartYear] = useState(START_YEAR_FILTER)
-    const [endYear, setEndYear] = useState(END_YEAR_FILTER)
+    const [startYear, setStartYear] = useState('-')
+    const [endYear, setEndYear] = useState('-')
     const [movieTitle, setMovieTitle] = useState('')
     const [movieCountry, setMovieCountry] = useState('-')
     const [sorting, setSorting] = useState('')
 
     const resetHandler = () => {
-        setStartYear(START_YEAR_FILTER)
-        setEndYear(END_YEAR_FILTER)
+        setStartYear('-')
+        setEndYear('-')
         setMovieTitle('')
         setMovieCountry('-')
         setSorting('')
@@ -23,7 +23,9 @@ const MovieFilters = (props) => {
 
     function handleSubmit(event) {
         event.preventDefault();
-        let queryParams = `&year_max=${endYear}&year_min=${startYear}`
+
+        let queryParams= endYear === '-' ? `&year_max=${END_YEAR_FILTER}` : `&year_max=${endYear}`
+        queryParams += startYear === '-' ? `&year_min=${START_YEAR_FILTER}` : `&year_min=${startYear}`
         if (movieTitle.length > 0) {
             queryParams += `&title=${movieTitle}`
         }
@@ -42,10 +44,8 @@ const MovieFilters = (props) => {
         <>
             <form onSubmit={handleSubmit}>
                 <div className='flex flex-row'>
-                    <YearFilter subscriptionYear='start' onSelectedYear={setStartYear} selectedYear={startYear}
-                                selectedYearDefault={START_YEAR_FILTER}/>
-                    <YearFilter subscriptionYear='end' onSelectedYear={setEndYear} selectedYear={endYear}
-                                selectedYearDefault={END_YEAR_FILTER}/>
+                    <YearFilter subscriptionYear='start' onSelectedYear={setStartYear} selectedYear={startYear}/>
+                    <YearFilter subscriptionYear='end' onSelectedYear={setEndYear} selectedYear={endYear}/>
                     <CountryFilter onSelectedCountry={setMovieCountry} selectedCountry={movieCountry}/>
                 </div>
 
