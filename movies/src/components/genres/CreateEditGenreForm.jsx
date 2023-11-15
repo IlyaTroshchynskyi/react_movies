@@ -4,6 +4,7 @@ import useValidation from "../../hooks/useValidation";
 import {validateDescription, validateName, validateUrl} from "../../validators/genres";
 import Input from "../Input";
 import TextArea from "../TextArea";
+import SubmitCancelButtons from "../SubmitCancelButtons";
 
 function CreateEditGenreForm(props) {
     const navigate = useNavigate()
@@ -92,20 +93,8 @@ function CreateEditGenreForm(props) {
                     </div>
                 </div>
 
-                <div className="mt-6 flex items-center justify-start gap-x-6">
-                    <button
-                        type="button"
-                        onClick={onCancelHandler}
-                        className="rounded-md bg-gray-300 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-cyan-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-                        Cancel
-                    </button>
-                    <button
-                        type="submit"
-                        className="rounded-md bg-indigo-300 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-cyan-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                    >
-                        Save
-                    </button>
-                </div>
+                <SubmitCancelButtons onCancelHandler={onCancelHandler}/>
+
             </form>
         </>
     )

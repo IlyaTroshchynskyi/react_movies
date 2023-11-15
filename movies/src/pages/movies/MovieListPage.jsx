@@ -27,21 +27,23 @@ const MovieListPage = () => {
         queryFn: () => getMovies(PAGE_SIZE, PAGE_SIZE * startOffset, filterQueryParams)
     })
 
-    let content = isPending ? <div className='flex items-center'><LoadingIndicator/></div> : null
-    content = isError ? <ErrorBlock message={error.message || 'Failed to fetch movies data'}></ErrorBlock> : content
-    content = data ? <SideBarOutput
-        totalCount={data.count}
-        pageSize={PAGE_SIZE}
-        onPageChange={page => setCurrentPage(page)}
-        setCurrentPage={setCurrentPage}
-        currentPage={currentPage}
-        columns={moviesColumns}
-        data={data.results}
-        buttonAddSignature={'Add movie'}
-        resourcePath='edit'
-        deleteRecordFunc={deleteMovie}
-        queryKey='movies'
-    /> : content
+    const content = isPending ? <div className='flex items-center'><LoadingIndicator/></div>
+        : isError
+            ? <ErrorBlock message={error.message || 'Failed to fetch movies data'}></ErrorBlock>
+            : data
+                ? <SideBarOutput
+                    totalCount={data.count}
+                    pageSize={PAGE_SIZE}
+                    onPageChange={page => setCurrentPage(page)}
+                    setCurrentPage={setCurrentPage}
+                    currentPage={currentPage}
+                    columns={moviesColumns}
+                    data={data.results}
+                    buttonAddSignature={'Add movie'}
+                    resourcePath='edit'
+                    deleteRecordFunc={deleteMovie}
+                    queryKey='movies'
+                /> : null
 
     return (
         <>

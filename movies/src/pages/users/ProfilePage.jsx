@@ -11,10 +11,12 @@ const ProfilePage = () => {
         queryFn: getCurrentUser
     })
 
-    let content = isPending ? <div className='flex items-center'><LoadingIndicator/></div> : null
-    content = isError ?
-        <ErrorBlock key='f' message={error.message || 'Failed to fetch user data'}></ErrorBlock> : content
-    content = data ? <UserProfile title='Profile page' userData={data}/> : content
+    const content = isPending ? <div className='flex items-center'><LoadingIndicator/></div>
+        : isError
+            ? <ErrorBlock message={error.message || 'Failed to fetch user data'}/>
+            : data
+                ? <UserProfile title='Profile page' userData={data}/>
+                : null
 
     return (
         <>

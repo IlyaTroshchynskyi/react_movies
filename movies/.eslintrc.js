@@ -27,9 +27,11 @@ module.exports = {
         "sourceType": "module"
     },
     "plugins": [
-        "react"
+        "react",
+        "@stylistic/js"
     ],
     "rules": {
         'react/prop-types': 'off',
+        'eol-last': 'always'
     }
 }

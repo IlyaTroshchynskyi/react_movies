@@ -2,7 +2,7 @@ import React from 'react';
 import {Link, Outlet} from "react-router-dom";
 
 function SideBar() {
-    const sideBarLinks = [['Genres', 'genres'], ['Movies', 'movies']]
+    const sideBarLinks = [['Genres', 'genres'], ['Movies', 'movies'], ['Actors', 'actors']]
     return (
         <>
 
