@@ -39,6 +39,7 @@ const ActorListPage = () => {
                     resourcePath='edit'
                     deleteRecordFunc={deleteActor}
                     queryKey='actors'
+                    queryParams=''
                 />
                 : null;
 

@@ -39,6 +39,7 @@ const GenrePage = () => {
                     resourcePath='edit'
                     deleteRecordFunc={deleteGenre}
                     queryKey='genres'
+                    queryParams=''
                 /> : null
 
     return (

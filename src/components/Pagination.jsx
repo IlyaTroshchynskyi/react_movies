@@ -12,11 +12,6 @@ const Pagination = props => {
     pageSize
   });
 
-  // If there are less than 2 times in pagination range we shall not render the component
-  if (currentPage === 0 || paginationRange.length < 2) {
-    return null;
-  }
-
   const onNext = () => {
     onPageChange(currentPage + 1);
   };
@@ -35,7 +30,7 @@ const Pagination = props => {
       <div>
         <nav className="isolate inline-flex -space-x-px rounded-md shadow-sm" aria-label="Pagination">
           <Link onClick={onPrevious}
-                to={`?page=${currentPage - 1}`}
+                to={`?page=${currentPage - 1}${props.queryParams}`}
                 className={currentPage === 1 ? `${prevNextClassName} pointer-events-none` : prevNextClassName}>
             <span className="sr-only">Previous</span>
             <svg className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
@@ -57,7 +52,7 @@ const Pagination = props => {
             return (
                 <Link
                     key={pageNumber}
-                    to={`?page=${pageNumber}`}
+                    to={`?page=${pageNumber}${props.queryParams}`}
                     className={currentPage === pageNumber ? `${linkClassName} pointer-events-none bg-indigo-400` : linkClassName}
                     onClick={() => onPageChange(pageNumber)}
                 >
@@ -68,7 +63,7 @@ const Pagination = props => {
 
           <Link
               onClick={onNext}
-              to={`?page=${currentPage + 1}`}
+              to={`?page=${currentPage + 1}${props.queryParams}`}
               className={currentPage === lastPage ? `${prevNextClassName} pointer-events-none` : prevNextClassName}>
             <span className="sr-only">Next</span>
             <svg className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
