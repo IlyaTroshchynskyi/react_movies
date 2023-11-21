@@ -5,10 +5,22 @@ import LoadingIndicator from "../../components/LoadingIndIcator";
 import SideBarOutput from "../../components/SideBarOutput";
 import {moviesColumns} from "../../const/TableColumnNames";
 import {useState} from "react";
-import {useLocation} from "react-router";
+import {useLocation, useNavigate} from "react-router";
 import {deleteMovie, getMovies} from "../../http_queries/httpQueriesMovies";
 import {PAGE_SIZE} from "../../const/config";
 import MovieFilters from "../../components/movies/MovieFilters";
+
+const convertQueryParams = (urlString) => {
+    let params = new URLSearchParams(urlString);
+    params.delete('year_max')
+    params.delete('year_min')
+
+    if (params.size > 0) {
+        let updatedQueryString = params.toString()
+        return '&' + updatedQueryString
+    }
+    return ''
+}
 
 
 const MovieListPage = () => {
@@ -24,7 +36,7 @@ const MovieListPage = () => {
 
     const {data, isPending, isError, error} = useQuery({
         queryKey: ['movies', {limit: PAGE_SIZE, offset: startOffset, filterQueryParams: filterQueryParams}],
-        queryFn: () => getMovies(PAGE_SIZE, PAGE_SIZE * startOffset, filterQueryParams)
+        queryFn: () => getMovies(PAGE_SIZE, PAGE_SIZE * startOffset, filterQueryParams),
     })
 
     const content = isPending ? <div className='flex items-center'><LoadingIndicator/></div>
@@ -43,11 +55,12 @@ const MovieListPage = () => {
                     resourcePath='edit'
                     deleteRecordFunc={deleteMovie}
                     queryKey='movies'
+                    queryParams={convertQueryParams(filterQueryParams)}
                 /> : null
 
     return (
         <>
-            <MovieFilters onSetFilterQueryParams={setFilterQueryParams}/>
+            <MovieFilters onSetFilterQueryParams={setFilterQueryParams} convertQueryParams={convertQueryParams}/>
             {content}
         </>
     )

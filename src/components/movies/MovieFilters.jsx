@@ -4,6 +4,7 @@ import {useState} from "react";
 import {END_YEAR_FILTER, START_YEAR_FILTER} from "../../const/config";
 import CountryFilter from "./CountryFilter";
 import SortingFilter from "./SortingFilter";
+import {useNavigate} from "react-router";
 
 
 const MovieFilters = (props) => {
@@ -12,6 +13,8 @@ const MovieFilters = (props) => {
     const [movieTitle, setMovieTitle] = useState('')
     const [movieCountry, setMovieCountry] = useState('-')
     const [sorting, setSorting] = useState('')
+    const navigation = useNavigate()
+
 
     const resetHandler = () => {
         setStartYear('-')
@@ -19,12 +22,11 @@ const MovieFilters = (props) => {
         setMovieTitle('')
         setMovieCountry('-')
         setSorting('')
+        navigation('/movies')
     }
 
-    function handleSubmit(event) {
-        event.preventDefault();
-
-        let queryParams= endYear === '-' ? `&year_max=${END_YEAR_FILTER}` : `&year_max=${endYear}`
+    const constructQueryParams = () => {
+        let queryParams = endYear === '-' ? `&year_max=${END_YEAR_FILTER}` : `&year_max=${endYear}`
         queryParams += startYear === '-' ? `&year_min=${START_YEAR_FILTER}` : `&year_min=${startYear}`
         if (movieTitle.length > 0) {
             queryParams += `&title=${movieTitle}`
@@ -36,7 +38,15 @@ const MovieFilters = (props) => {
             queryParams += `&ordering=${sorting === 'asc' ? 'id' : '-id'}`
         }
 
+        return queryParams
+    }
+
+    function handleSubmit(event) {
+        event.preventDefault();
+
+        const queryParams = constructQueryParams()
         props.onSetFilterQueryParams(queryParams)
+        navigation('?' + props.convertQueryParams(queryParams))
     }
 
 

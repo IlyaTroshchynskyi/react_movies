@@ -41,6 +41,7 @@ function SideBarOutput(props) {
                         totalCount={props.totalCount}
                         pageSize={props.pageSize}
                         onPageChange={page => props.setCurrentPage(page)}
+                        queryParams={props.queryParams}
                     />
                 </div>
 
