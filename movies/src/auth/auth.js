@@ -37,5 +37,8 @@ export async function getAuthToken() {
             return data.access
         }
     }
+    localStorage.removeItem(tokenTypes.movieAccessToken)
+    localStorage.removeItem(tokenTypes.movieRefreshToken)
+    window.location.reload()
     return null
 }

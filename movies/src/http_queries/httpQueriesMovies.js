@@ -48,3 +48,5 @@ export async function createMovie({movieData}) {
 
     return data
 }
+
+export default {createMovie, getMovies, getMovie, getAllCountries, updateMovie, deleteMovie}

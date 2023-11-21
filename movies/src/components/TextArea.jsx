@@ -13,6 +13,7 @@ const TextArea = (props) => {
                     {props.label}
                 </label>
                 <textarea
+                    data-testid={props.id}
                     id={props.id}
                     rows="4"
                     onBlur={props.onBlurHandler}

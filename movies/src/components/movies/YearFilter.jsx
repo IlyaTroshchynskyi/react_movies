@@ -13,7 +13,7 @@ const rangeYears = Array.from(
 const YearFilter = (props) => {
 
     const selectOptionHandler = (event) => {
-        props.onSelectedYear(+event.target.value)
+        props.onSelectedYear(event.target.value)
     }
 
 
@@ -23,11 +23,13 @@ const YearFilter = (props) => {
                 <label htmlFor="years" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                     {`Filter by ${props.subscriptionYear} year`}
                 </label>
-                <select
-                    onChange={selectOptionHandler}
-                    id="years"
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                    <option value={props.selectedYear}>{props.selectedYearDefault}</option>
+
+                <select value={props.selectedYear}
+                        onChange={selectOptionHandler}
+                        id={`${props.subscriptionYear}years`}
+                        data-testid={`${props.subscriptionYear}years`}
+                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    <option value={props.selectedYear}>{props.selectedYear}</option>
                     {
                         rangeYears.map((year) => {
                             return <option key={year} value={year}>{year}</option>
